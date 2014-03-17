@@ -3,7 +3,7 @@
 
 pkgname=('python-virtualenv' 'python2-virtualenv')
 pkgver=1.11.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Virtual Python Environment builder"
 url="http://www.virtualenv.org/"
 arch=('any')
