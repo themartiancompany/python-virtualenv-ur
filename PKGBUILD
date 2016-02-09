@@ -3,7 +3,7 @@
 
 pkgname=('python-virtualenv' 'python2-virtualenv')
 pkgver=14.0.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Virtual Python Environment builder"
 url="https://virtualenv.pypa.io/"
 arch=('any')
