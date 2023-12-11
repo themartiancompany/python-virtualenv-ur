@@ -1,6 +1,6 @@
 pkgbase = python-virtualenv
 	pkgdesc = Virtual Python Environment builder
-	pkgver = 20.24.6
+	pkgver = 20.25.0
 	pkgrel = 1
 	url = https://virtualenv.pypa.io
 	arch = any
@@ -32,7 +32,7 @@ pkgbase = python-virtualenv
 	conflicts = virtualenv
 	replaces = virtualenv
 	options = !makeflags
-	source = python-virtualenv::git+https://github.com/pypa/virtualenv#commit=29c08dfd640ecc176df995c39a55a0509990bdc4
+	source = python-virtualenv::git+https://github.com/pypa/virtualenv#commit=1941c1d5abf81814992b68bbc86c0020dc75a3ad
 	b2sums = SKIP
 
 pkgname = python-virtualenv
