@@ -1,8 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
 # Maintainer: George Rawlinson <grawlinson@archlinux.org>
 # Contributor: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Dan McGee <dan@archlinux.org>
 # Contributor: Daniele Paolella <dp@mcrservice.it>
+# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
+# Maintainer: Truocolo <truocolo@aol.com>
 
+_os="$( \
+  uname -o)"
 pkgname=python-virtualenv
 pkgver=20.25.0
 pkgrel=1
@@ -19,9 +25,10 @@ depends=(
 makedepends=(
   'git'
   'python-build'
-  'python-installer'
+  'python-filelock'
   'python-hatchling'
   'python-hatch-vcs'
+  'python-installer'
   'python-sphinx'
   'python-sphinx-argparse'
   'python-sphinxcontrib-towncrier'
@@ -83,20 +90,48 @@ check() {
 }
 
 package() {
-  cd "$pkgname"
-
-  python -m installer --destdir="$pkgdir" dist/*.whl
-
+  local \
+    _ln_opts=()
+  cd \
+    "${pkgname}"
+  python \
+    -m \
+      installer \
+      --destdir="${pkgdir}" \
+      dist/*.whl
   # man page
-  install -vDm644 -t "$pkgdir/usr/share/man/man1" docs/_build/man/virtualenv.1
-
+  install \
+    -vDm644 \
+    -t \
+    "$pkgdir/usr/share/man/man1" \
+    docs/_build/man/virtualenv.1
   # sort out files with suffix of 3
-  ln -s virtualenv.1.gz "${pkgdir}/usr/share/man/man1/virtualenv3.1.gz"
-  ln "$pkgdir/usr/bin/virtualenv" "$pkgdir/usr/bin/virtualenv3"
+  ln \
+    -s \
+    virtualenv.1.gz \
+    "${pkgdir}/usr/share/man/man1/virtualenv3.1.gz"
+  [[ "${_os}" != 'Linux' ]] && \
+    _ln_opts=(
+      -s
+    )
+  ln \
+    "${_ln_opts[@]}" \
+    "$pkgdir/usr/bin/virtualenv" \
+    "$pkgdir/usr/bin/virtualenv3"
 
   # symlink license file
-  local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
-  install -d "$pkgdir/usr/share/licenses/$pkgname"
-  ln -s "$site_packages/${pkgname#python-}-$pkgver.dist-info/licenses/LICENSE" \
+  local \
+    site_packages=$( \
+      python \
+        -c \
+	  "import site; print(site.getsitepackages()[0])")
+  install \
+    -d \
+      "$pkgdir/usr/share/licenses/$pkgname"
+  ln \
+    -s \
+    "$site_packages/${pkgname#python-}-$pkgver.dist-info/licenses/LICENSE" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
+
+# vim:set sw=2 sts=-1 et:
