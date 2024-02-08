@@ -4,8 +4,8 @@
 # Contributor: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Dan McGee <dan@archlinux.org>
 # Contributor: Daniele Paolella <dp@mcrservice.it>
-# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
-# Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer:  Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
+# Maintainer:  Truocolo <truocolo@aol.com>
 
 _os="$( \
   uname -o)"
@@ -15,7 +15,9 @@ pkgrel=1
 pkgdesc='Virtual Python Environment builder'
 arch=('any')
 url='https://virtualenv.pypa.io'
-license=('MIT')
+license=(
+  'MIT'
+)
 depends=(
   'python'
   'python-distlib'
